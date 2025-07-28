@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 import Quote from "../models/Qoute.js";
-import generatePDF from "../utils/generatePdf.js";
+import generatePDF from "../utils/generatePDF.js";
 
 export const generatePdfHandler = async (req, res) => {
   try {
