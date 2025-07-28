@@ -1,5 +1,5 @@
 import Quote from "../models/Qoute.js";
-import generatePDF from "../utils/generatePdf.js";
+import generatePDF from "../utils/generatePDF.js";
 import transporter from "../config/nodeMailer.js";
 import path from "path";
 import fs from "fs";
