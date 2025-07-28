@@ -24,11 +24,11 @@ const generatePDF = async (data) => {
 
     doc.registerFont(
       "calibri",
-      path.join(__dirname, "./assets/fonts/calibri.ttf")
+      path.join(__dirname, "./assets/fonts/CALIBRI.TTF")
     );
     doc.registerFont(
       "calibri-bold",
-      path.join(__dirname, "./assets/fonts/calibrib.ttf")
+      path.join(__dirname, "./assets/fonts/CALIBRIB.TTF")
     );
     doc.registerFont(
       "outfit",
