@@ -13,7 +13,7 @@ export default function addAnnexure4(doc, data) {
     .moveDown(0.5)
     .font("calibri-bold")
     .fontSize(10)
-    .text("D.1: Price Schedule (Krish Crane Format)")
+    .text("D.1: Price Schedule (Krish Crane Format)",{ underline: true })
     .moveDown(0.5);
 
   // 🧾 Table Generation

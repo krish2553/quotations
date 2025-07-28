@@ -38,6 +38,18 @@ const QuoteForm = () => {
     }
   };
 
+   // 1. Create a function for the "Next" button
+  const handleNext = () => {
+    setStep((s) => Math.min(steps.length - 1, s + 1));
+    window.scrollTo(0, 0); // Scroll to top
+  };
+
+  // 2. Create a function for the "Back" button
+  const handleBack = () => {
+    setStep((s) => Math.max(0, s - 1));
+    window.scrollTo(0, 0); // Scroll to top
+  };
+
   return (
     <div className="p-6 max-w-4xl mx-auto bg-gradient-to-br from-gray-50 to-gray-200 min-h-screen">
       <h2 className="text-3xl font-bold mb-6 text-gray-800">{steps[step]}</h2>
@@ -51,7 +63,7 @@ const QuoteForm = () => {
       </div>
       <div className="flex justify-between">
         <button
-          onClick={() => setStep((s) => Math.max(0, s - 1))}
+          onClick={handleBack}
           disabled={step === 0 || isLoading} // 4. Disable back button while loading
           className="px-6 py-2 bg-gray-300 text-gray-800 rounded-lg font-medium hover:bg-gray-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
@@ -67,7 +79,7 @@ const QuoteForm = () => {
           </button>
         ) : (
           <button
-            onClick={() => setStep((s) => Math.min(steps.length - 1, s + 1))}
+            onClick={handleNext}
             disabled={isLoading} // 7. Disable next button while loading
             className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all"
           >

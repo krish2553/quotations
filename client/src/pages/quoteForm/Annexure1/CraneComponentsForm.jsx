@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useQuote } from "../../../context/quoteContext";
 
 const craneComponents = [
@@ -35,10 +36,21 @@ const craneComponents = [
   "Movable Pendant and RRC",
 ];
 
+
 const CraneComponentsForm = () => {
   const { quoteData, updateQuote } = useQuote();
   const selected = quoteData.annexure1?.craneComponentNames || [];
 
+  useEffect(() => {
+    // If the component list hasn't been initialized yet, select all by default.
+    // This runs only once when the form is first seen.
+    if (quoteData.annexure1?.craneComponentNames === undefined) {
+      updateQuote("annexure1", {
+        ...quoteData.annexure1,
+        craneComponentNames: craneComponents,
+      });
+    }
+  }, []);
   const handleToggle = (name) => {
     const updated = selected.includes(name)
       ? selected.filter((item) => item !== name)

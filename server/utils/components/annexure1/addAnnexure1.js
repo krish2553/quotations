@@ -25,10 +25,9 @@ export default function addAnnexure1(doc, data) {
     .font("calibri");
   doc
     .font("calibri-bold")
-    .fontSize(12)
+    .fontSize(10)
     .fillColor("black")
     .text(`A.1 : Bay Area`, { underline: true })
-    .fontSize(10)
     .moveDown(0.5);
 
   // Loop over all bay areas
