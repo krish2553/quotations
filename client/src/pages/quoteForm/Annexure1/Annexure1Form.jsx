@@ -16,9 +16,9 @@ const Annexure1Form = () => {
       </div>
 
       {/* Crane Components */}
-      <div className="bg-white/60 backdrop-blur-md rounded-xl shadow-md">
+      {/* <div className="bg-white/60 backdrop-blur-md rounded-xl shadow-md">
         <CraneComponentsForm />
-      </div>
+      </div> */}
     </div>
   );
 };
