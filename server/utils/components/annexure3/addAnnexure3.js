@@ -9,7 +9,7 @@ export default function addAnnexure3(doc, data) {
     .fontSize(12)
     .moveDown(2)
     .fillColor("black")
-    .text("C : Annexure 3 – Make of Bought Out Items", {
+    .text("Annexure 3 – Make of Bought Out Items", {
       underline: true,
       align: "center",
     })

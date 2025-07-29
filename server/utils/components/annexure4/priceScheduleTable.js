@@ -54,8 +54,7 @@ export default function generatePriceScheduleTable(doc, data) {
         width: columnWidths[2] - 10,
       });
 
-      uniformRowHeight =
-        Math.max(defaultRowHeight, maxDescHeight, craneNameHeight) - 12;
+      uniformRowHeight = Math.max(defaultRowHeight, maxDescHeight) - 12;
 
       descriptions.forEach((desc, descIndex) => {
         const qty = quantities[descIndex] || 1;
@@ -283,12 +282,6 @@ export default function generatePriceScheduleTable(doc, data) {
     const y = doc.y;
     let x = startX;
 
-    const bgColor = isHeader
-      ? "#dbe5f1"
-      : table.rows?.[rowIndex]?.craneColorIndex % 2 === 0
-      ? "#ffffff"
-      : "#dbe5f1";
-
     rowData.forEach((cell, colIndex) => {
       if (drawnCells[rowIndex]?.[colIndex]) {
         if (colIndex < columnWidths.length - 1) {
@@ -296,7 +289,15 @@ export default function generatePriceScheduleTable(doc, data) {
         }
         return;
       }
-
+      const bgColor = isHeader
+        ? "#d9e2f3"
+        : colIndex === 0
+        ? "#ffffff"
+        : colIndex === 1
+        ? "#ffffff"
+        : table.rows?.[rowIndex]?.craneColorIndex % 2 === 0
+        ? "#ffffff"
+        : "#d9e2f3";
       const cellObj =
         typeof cell === "object" && cell !== null ? cell : { text: cell };
       const { text = "", rowSpan = 1, colSpan = 1 } = cellObj;

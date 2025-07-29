@@ -2,7 +2,6 @@ import { createTable } from "./tableUtils.js";
 
 // SECTION: Render a crane with multi-section 2-column tables
 export default function addCrane(doc, crane, craneNumber = "") {
-
   console.log("addCrane : ", crane);
   doc
     .font("calibri")
@@ -60,5 +59,6 @@ export default function addCrane(doc, crane, craneNumber = "") {
     .text(
       "The above details are based on the preliminary design, input data, and cycle calculations provided. We reserve the right to make modifications in the final design as needed. However, any such changes will not impact the crane's stated performance ratings. Please note that alterations to the input data or plant capacity may affect the pricing."
     )
-    .moveDown(2);
+    .addPage()
+    .moveDown(1);
 }

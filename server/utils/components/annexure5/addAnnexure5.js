@@ -25,9 +25,9 @@ export default function addAnnexure5(doc, data) {
       const y = startY + i * rowHeight;
 
       // Left column
-      doc.rect(startX, y, columnWidth, rowHeight).stroke(0.5);
+      doc.rect(startX, y, columnWidth, rowHeight);
       doc
-        .fontSize(9)
+        .fontSize(8)
         .text(
           `${leftColumn[i].label}: ${leftColumn[i].value}`,
           startX + 5,
@@ -38,7 +38,7 @@ export default function addAnnexure5(doc, data) {
         );
 
       // Right column
-      doc.rect(column2X, y, columnWidth, rowHeight).stroke(0.5);
+      doc.rect(column2X, y, columnWidth, rowHeight);
       doc
         .fontSize(9)
         .text(
@@ -60,19 +60,17 @@ export default function addAnnexure5(doc, data) {
     .fontSize(12)
     .moveDown(2)
     .fillColor("black")
-    .text("E: Annexure 5 - General Terms and Conditions for Sales/Warranty", {
+    .text("Annexure 5 - General Terms and Conditions for Sales/Warranty", {
       underline: true,
       align: "center",
     })
-    .moveDown(0.5); 
+    .moveDown(0.5);
 
   // Section Title
   doc
     .font("calibri-bold")
     .fontSize(10)
-    .text("E.1 General Terms and Conditions", {
-      underline: true,
-    });
+    .text("5.1 General Terms and Conditions");
 
   // Content for 5.1
   doc.font("calibri").fontSize(9).moveDown(0.5);
@@ -97,9 +95,7 @@ export default function addAnnexure5(doc, data) {
     .moveDown(0.5)
     .font("calibri-bold")
     .fontSize(10)
-    .text("E.2 Warranty Terms and Conditions (For EOT Crane)", {
-      underline: true,
-    });
+    .text("5.2 Warranty Terms and Conditions (For EOT Crane)");
 
   doc.font("calibri").fontSize(9);
 

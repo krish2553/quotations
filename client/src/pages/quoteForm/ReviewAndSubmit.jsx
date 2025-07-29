@@ -32,8 +32,6 @@ const ReviewAndSubmit = () => {
 
   return (
     <div className="p-6 bg-white/60 backdrop-blur-md rounded-xl shadow-md space-y-6">
-      <h3 className="text-xl font-semibold text-gray-800">Review and Submit</h3>
-
       <button
         onClick={handleGeneratePDF}
         className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all disabled:opacity-70"

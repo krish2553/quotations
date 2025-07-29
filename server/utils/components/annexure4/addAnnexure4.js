@@ -9,11 +9,11 @@ export default function addAnnexure4(doc, data) {
     .font("calibri-bold")
     .fontSize(12)
     .moveDown(2)
-    .text("D: Annexure 4 – Price Schedule", { underline: true, align: "center" })
+    .text("Annexure 4 – Price Schedule", { underline: true, align: "center" })
     .moveDown(0.5)
     .font("calibri-bold")
     .fontSize(10)
-    .text("D.1: Price Schedule (Krish Crane Format)",{ underline: true })
+    .text("4.1: Price Schedule (Krish Crane Format)")
     .moveDown(0.5);
 
   // 🧾 Table Generation

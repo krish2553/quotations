@@ -16,7 +16,7 @@ export default function addControlSafety(doc, data) {
     .font("calibri-bold")
     .fontSize(10)
     .fillColor("black")
-    .text("C.3 : Control & Safety Components", { underline: true })
+    .text("3.3 : Control & Safety Components")
     .moveDown(0.5);
 
   makeTable(doc, table, 40);

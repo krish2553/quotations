@@ -7,11 +7,12 @@ export default function addAnnexure2(doc, data) {
   doc
     .font("calibri-bold")
     .moveDown()
-    .fontSize(10)
-    .text("B : Annexure 2 – Scope of Supply", {
+    .fontSize(12)
+    .text("Annexure 2 – Scope of Supply", {
       underline: true,
       align: "center",
     })
+    .fontSize(10)
     .moveDown(0.5);
 
   // ✅ Pull scope of supply from user input in quoteData
@@ -31,10 +32,9 @@ export default function addAnnexure2(doc, data) {
   // 🔹 B.1 – Scope for Krish Crane
   doc
     .font("calibri-bold")
-    .fontSize(12)
-    .fillColor("#000000")
-    .text("B.1 : Scope for Krish Crane", { underline: true })
     .fontSize(10)
+    .fillColor("#000000")
+    .text("2.1 : Scope for Krish Crane")
     .moveDown(0.5)
     .font("calibri")
     .fillColor("black");
@@ -58,7 +58,7 @@ export default function addAnnexure2(doc, data) {
     .font("calibri-bold")
     .fontSize(10)
     .fillColor("#000000")
-    .text("B.2 : Scope for Buyer", { underline: true })
+    .text("2.2 : Scope for Buyer")
     .moveDown(0.5)
     .font("calibri")
     .fillColor("black");

@@ -28,7 +28,7 @@ export default function addCraneComponents(doc, data) {
     .fontSize(10)
     .moveDown(2)
     .fillColor("black")
-    .text("A.3 : Crane Components", { underline: true })
+    .text("1.4 : Crane Components", { underline: true })
     .moveDown(0.5);
 
   components.forEach((section, index) => {
@@ -62,7 +62,7 @@ export default function addCraneComponents(doc, data) {
     const xImage = xText + textWidth + spacing;
 
     // 🔹 Numbered Component Title: A.3.X
-    const sectionNumber = `A.3.${index + 1}`;
+    const sectionNumber = `1.4.${index + 1}`;
     doc
       .font("calibri")
       .fontSize(10)

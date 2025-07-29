@@ -16,7 +16,7 @@ export default function addElectrical(doc, data) {
     .font("calibri-bold")
     .fontSize(10)
     .fillColor("black")
-    .text("C.2 : Electrical Components", { underline: true })
+    .text("3.2 : Electrical Components")
     .moveDown(0.5);
 
   makeTable(doc, table, 40);

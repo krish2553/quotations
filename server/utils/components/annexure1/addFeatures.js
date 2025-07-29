@@ -23,15 +23,14 @@ export default function addFeatures(doc, data) {
   if (unitArray.length === 0) return;
 
   // 🔹 Step 2: Always start features section on a new page
-  doc.addPage();
+  // doc.addPage();
 
   // 🔹 Step 3: Main section heading A.2
   doc
     .font("calibri-bold")
     .fontSize(10)
-    .moveDown(2)
     .fillColor("black")
-    .text("A.2 : Features", { underline: true })
+    .text("1.3 : Features")
     .moveDown(0.5);
 
   // 🔹 Step 4: Render each unique hoisting unit with A.2.X numbering
@@ -39,7 +38,7 @@ export default function addFeatures(doc, data) {
     const unitFeatures = features[unitName];
     if (!unitFeatures || !unitFeatures.length) return;
 
-    const featureNumber = `A.2.${index + 1}`;
+    const featureNumber = `1.3.${index + 1}`;
     const tableData = [
       ["No.", "Description"],
       ...unitFeatures.map((desc, i) => [String(i + 1), desc]),
@@ -62,6 +61,6 @@ export default function addFeatures(doc, data) {
       .moveDown(0.5);
 
     // 📋 Features table
-    createTable(doc, tableData ?? [], [40, 440], "#bbbbbb", 0.5);
+    createTable(doc, tableData ?? [], [40, 440], "#eeeeee", 0.5);
   });
 }

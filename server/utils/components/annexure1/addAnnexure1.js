@@ -15,7 +15,7 @@ export default function addAnnexure1(doc, data) {
     .fillColor("#000000")
     .moveDown(2)
     .text(
-      "A : Annexure 1 – Technical Data Sheet, Features List and Crane Component",
+      "Annexure 1 – Technical Data Sheet and Features List",
       {
         underline: true,
         align: "center",
@@ -27,16 +27,16 @@ export default function addAnnexure1(doc, data) {
     .font("calibri-bold")
     .fontSize(10)
     .fillColor("black")
-    .text(`A.1 : Bay Area`, { underline: true })
+    // .text(`1.1 : Bay Area`, { underline: true })
     .moveDown(0.5);
 
   // Loop over all bay areas
   data.annexure1.bayAreas.forEach((bay, index) => {
-    if (index !== 0) doc.addPage().moveDown();
+    if (index !== 0) doc.moveDown(0);
     addBayArea(doc, bay, index + 1); // Pass bay number
   });
 
   addFeatures(doc, data);
 
-  addCraneComponents(doc, data);
+  // addCraneComponents(doc, data);
 }

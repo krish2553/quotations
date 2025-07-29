@@ -16,7 +16,7 @@ export default function addMechanical(doc, data) {
     .font("calibri-bold")
     .fontSize(10)
     .fillColor("black")
-    .text("C.1 : Mechanical / Structural Components", { underline: true })
+    .text("3.1 : Mechanical / Structural Components")
     .moveDown(0.5);
 
   // 🧾 Table
