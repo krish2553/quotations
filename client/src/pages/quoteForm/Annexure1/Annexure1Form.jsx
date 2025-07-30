@@ -11,12 +11,12 @@ const Annexure1Form = () => {
       </h2> */}
 
       {/* Bay Areas and Cranes */}
-      <div className="bg-white/60 backdrop-blur-md rounded-xl shadow-md">
+      <div className="bg-white backdrop-blur-md rounded-3xl shadow">
         <BayAreaSection />
       </div>
 
       {/* Crane Components */}
-      {/* <div className="bg-white/60 backdrop-blur-md rounded-xl shadow-md">
+      {/* <div className="bg-white/60 backdrop-blur-md rounded-2xl shadow">
         <CraneComponentsForm />
       </div> */}
     </div>

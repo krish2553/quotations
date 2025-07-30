@@ -23,7 +23,7 @@ const Annexure5Form = () => {
   };
 
   return (
-    <div className="p-6 bg-white/60 backdrop-blur-md rounded-xl shadow-md">
+    <div className="p-6 bg-white/60 backdrop-blur-md rounded-2xl shadow">
       <h3 className="text-xl font-semibold mb-4 text-gray-800">
         Annexure 5 - Commercial Terms, Delivery, and Warranty
       </h3>
@@ -31,7 +31,7 @@ const Annexure5Form = () => {
         {termsAndConditions.map((term, idx) => (
           <label
             key={idx}
-            className="flex items-center gap-3 p-3 bg-white/70 rounded-lg shadow-sm hover:bg-gray-50/70 transition-all cursor-pointer"
+            className="flex items-center gap-3 p-3 bg-white/70 rounded-xl shadow-sm hover:bg-gray-50/70 transition-all cursor-pointer"
           >
             <input
               type="checkbox"

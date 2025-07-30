@@ -142,11 +142,11 @@ const BayAreaSection = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 pb-1">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-semibold text-gray-700">Bay Areas</h3>
         <button
-          className="border border-blue-600 text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 hover:text-white transition-colors duration-300"
+          className="border border-blue-500 text-blue-400 px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-500 hover:text-white transition-colors duration-300"
           onClick={addBayArea}
         >
           + Bay
@@ -156,14 +156,14 @@ const BayAreaSection = () => {
       {bayAreas.map((bay, bayIdx) => (
         <details
           key={bayIdx}
-          className="mb-4 border border-gray-200/80 rounded-lg overflow-hidden"
+          className="mb-4 border border-blue-200/80 rounded-xl overflow-hidden"
         >
-          <summary className="cursor-pointer px-4 py-3 font-medium bg-gray-100/70 flex justify-between items-center hover:bg-gray-200/70 transition-all">
+          <summary className="cursor-pointer px-4 py-3 font-medium bg-blue-100/70 flex justify-between items-center hover:bg-blue-200/70 transition-all">
             <span className="text-gray-800">
               Bay Area {bayIdx + 1}: {bay.name || "(Unnamed)"}
             </span>
             <button
-              className="border border-red-600 text-red-600 text-sm px-3 py-1 rounded-md font-medium hover:bg-red-600 hover:text-white transition-colors duration-300"
+              className="border border-blue-500 text-blue-500 text-sm px-3 py-1 rounded-xl font-medium hover:bg-blue-500 hover:text-white transition-colors duration-300"
               onClick={(e) => {
                 e.stopPropagation();
                 const confirmDelete = window.confirm(
@@ -172,12 +172,12 @@ const BayAreaSection = () => {
                 if (confirmDelete) removeBayArea(e, bayIdx);
               }}
             >
-              - Bay
+              ×
             </button>
           </summary>
-          <div className="p-4 space-y-4 bg-white/50">
+          <div className="p-4 space-y-4 bg-blue-50/50">
             <input
-              className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border border-gray-300 bg-white p-2 rounded-xl focus:outline-none focus:ring-1 focus:ring-blue-400"
               type="text"
               placeholder="Bay Area Name"
               value={bay.name}
@@ -187,14 +187,14 @@ const BayAreaSection = () => {
             {bay.cranes.map((crane, craneIdx) => (
               <details
                 key={craneIdx}
-                className="border border-gray-200 rounded-lg overflow-hidden"
+                className="border border-blue-200 rounded-xl max-h-[80vh] overflow-auto scrollbar-minimal"
               >
-                <summary className="cursor-pointer px-3 py-2 bg-gray-50/70 font-medium flex justify-between items-center hover:bg-gray-100/70 transition-all">
+                <summary className="sticky top-0 z-10 cursor-pointer px-3 py-2 bg-blue-50 font-medium flex justify-between items-center hover:bg-blue-100 transition-all ">
                   <span className="text-gray-700">
                     Crane {craneIdx + 1}: {crane.name || "(Unnamed)"}
                   </span>
                   <button
-                    className="border border-red-600 text-red-600 text-sm px-3 py-1 rounded-md font-medium hover:bg-red-600 hover:text-white transition-colors duration-300"
+                    className="border border-blue-600 text-blue-600 text-sm px-3 py-1 rounded-xl font-medium hover:bg-blue-500 hover:text-white transition-colors duration-500"
                     onClick={(e) => {
                       e.stopPropagation();
                       const confirmDelete = window.confirm(
@@ -203,17 +203,17 @@ const BayAreaSection = () => {
                       if (confirmDelete) removeCrane(e, bayIdx, craneIdx);
                     }}
                   >
-                    - Crane
+                    ×
                   </button>
                 </summary>
-                <div className="p-4 bg-white/40">
+                <div className="p-4 bg-white">
                   <CraneForm bayIndex={bayIdx} craneIndex={craneIdx} />
                 </div>
               </details>
             ))}
 
             <button
-              className="border border-green-600 text-green-600 text-sm px-3 py-1 rounded-md font-medium hover:bg-green-600 hover:text-white transition-colors duration-300"
+              className="border border-green-600 text-green-600 text-sm px-3 py-1 rounded-xl font-medium hover:bg-green-600 hover:text-white transition-colors duration-300"
               onClick={() => addCrane(bayIdx)}
             >
               + Crane

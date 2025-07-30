@@ -56,7 +56,7 @@ const ClientInfoForm = () => {
   };
 
   return (
-    <div className="p-6 bg-white/60 backdrop-blur-md rounded-xl shadow-md">
+    <div className="p-6 bg-white/60 backdrop-blur-md rounded-2xl shadow">
       <div className="grid gap-4">
         {/* Select Existing Client */}
         <div className="grid grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
@@ -97,7 +97,7 @@ const ClientInfoForm = () => {
             type="text"
             value={quoteData.quotationId}
             readOnly
-            className="bg-gray-100/70 p-2 rounded-lg border border-gray-300 w-full"
+            className="bg-gray-100/70 p-2 rounded-xl border border-gray-300 w-full"
           />
         </div>
 
@@ -108,7 +108,7 @@ const ClientInfoForm = () => {
             type="text"
             value={quoteData.date}
             onChange={(e) => updateQuote("date", e.target.value)}
-            className="p-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="p-2 rounded-xl border border-gray-300 w-full focus:outline-none focus:ring-1 focus:ring-blue-400"
           />
         </div>
 
@@ -121,7 +121,7 @@ const ClientInfoForm = () => {
             type="text"
             value={quoteData.client?.name || ""}
             onChange={(e) => handleClientChange("name", e.target.value)}
-            className="p-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="p-2 rounded-xl border border-gray-300 w-full focus:outline-none focus:ring-1 focus:ring-blue-400"
           />
         </div>
 
@@ -134,7 +134,7 @@ const ClientInfoForm = () => {
             onChange={(e) =>
               handleClientChange("contactPerson", e.target.value)
             }
-            className="p-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="p-2 rounded-xl border border-gray-300 w-full focus:outline-none focus:ring-1 focus:ring-blue-400"
           />
         </div>
 
@@ -155,7 +155,7 @@ const ClientInfoForm = () => {
                 updated[idx] = e.target.value;
                 handleClientChange("address", updated);
               }}
-              className="p-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="p-2 rounded-xl border border-gray-300 w-full focus:outline-none focus:ring-1 focus:ring-blue-400"
             />
           </div>
         ))}
@@ -167,7 +167,7 @@ const ClientInfoForm = () => {
             type="text"
             value={quoteData.client?.subject || ""}
             onChange={(e) => handleClientChange("subject", e.target.value)}
-            className="p-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="p-2 rounded-xl border border-gray-300 w-full focus:outline-none focus:ring-1 focus:ring-blue-400"
           />
         </div>
 
@@ -178,7 +178,7 @@ const ClientInfoForm = () => {
             type="text"
             value={quoteData.client?.reference || ""}
             onChange={(e) => handleClientChange("reference", e.target.value)}
-            className="p-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="p-2 rounded-xl border border-gray-300 w-full focus:outline-none focus:ring-1 focus:ring-blue-400"
           />
         </div>
       </div>

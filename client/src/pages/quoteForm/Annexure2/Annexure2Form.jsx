@@ -57,30 +57,36 @@ const Annexure2Form = () => {
   };
 
   return (
-    <div className="p-6 bg-white/60 backdrop-blur-md rounded-xl shadow-md space-y-6">
+    <div className="p-6 bg-white backdrop-blur-md rounded-2xl shadow space-y-6">
       {/* Krish Crane Scope */}
       <div>
-        <label className="block font-medium mb-2 text-gray-700">
-          For Krish Crane
-        </label>
+        <div className="flex justify-between items-center mb-2">
+          <label className="font-medium text-blue-700">For Krish Crane</label>
+          <span className="text-sm text-gray-500">
+            Note: Enter for new point and - for subpoint
+          </span>
+        </div>
         <textarea
           value={annexure2.krishCraneScope}
           onChange={(e) => handleChange("krishCraneScope", e.target.value)}
           rows={20}
-          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="max-h-[80vh] overflow-auto scrollbar-minimal w-full p-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
         />
       </div>
 
       {/* Buyer Scope */}
       <div>
-        <label className="block font-medium mb-2 text-gray-700">
-          For Buyer
-        </label>
+        <div className="flex justify-between items-center mb-2">
+          <label className="font-medium text-blue-700">For Buyer</label>
+          <span className="text-sm text-gray-500">
+            Note: Enter for new point and - for subpoint
+          </span>
+        </div>
         <textarea
           value={annexure2.buyerScope}
           onChange={(e) => handleChange("buyerScope", e.target.value)}
           rows={20}
-          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="max-h-[80vh] overflow-auto scrollbar-minimal w-full p-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
         />
       </div>
     </div>

@@ -57,7 +57,7 @@ const CraneForm = ({ bayIndex, craneIndex }) => {
                     onChange={(e) =>
                       handleInputChange(section, index, e.target.value)
                     }
-                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-blue-400 sm:text-sm"
                   >
                     <option value="">Select hoisting unit</option>
                     <option value="KHX Series Hoist">KHX Series Hoist</option>
@@ -71,7 +71,7 @@ const CraneForm = ({ bayIndex, craneIndex }) => {
                     type="text"
                     value={quoteData.quotationId}
                     readOnly
-                    className="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-lg shadow-sm sm:text-sm"
+                    className="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-xl sm:text-sm"
                   />
                 ) : (
                   <input
@@ -80,7 +80,7 @@ const CraneForm = ({ bayIndex, craneIndex }) => {
                     onChange={(e) =>
                       handleInputChange(section, index, e.target.value)
                     }
-                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-blue-400 sm:text-sm"
                   />
                 )}
               </div>
@@ -98,7 +98,7 @@ const CraneForm = ({ bayIndex, craneIndex }) => {
           type="text"
           value={crane.name}
           onChange={(e) => handleNameChange(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-blue-400 sm:text-sm"
         />
       </div>
 

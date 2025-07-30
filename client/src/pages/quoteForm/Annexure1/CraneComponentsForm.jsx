@@ -71,7 +71,7 @@ const CraneComponentsForm = () => {
         {craneComponents.map((comp, idx) => (
           <label
             key={idx}
-            className="flex items-center gap-3 p-3 bg-white/70 rounded-lg shadow-sm hover:bg-gray-50/70 transition-all cursor-pointer"
+            className="flex items-center gap-3 p-3 bg-white/70 rounded-xl shadow-sm hover:bg-gray-50/70 transition-all cursor-pointer"
           >
             <input
               type="checkbox"

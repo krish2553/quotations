@@ -38,7 +38,7 @@ const QuoteForm = () => {
     }
   };
 
-   // 1. Create a function for the "Next" button
+  // 1. Create a function for the "Next" button
   const handleNext = () => {
     setStep((s) => Math.min(steps.length - 1, s + 1));
     window.scrollTo(0, 0); // Scroll to top
@@ -51,41 +51,72 @@ const QuoteForm = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-gradient-to-br from-gray-50 to-gray-200 min-h-screen">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">{steps[step]}</h2>
-      <div className="mb-8">
-        {step === 0 && <ClientInfoForm />}
-        {step === 1 && <Annexure1Form />}
-        {step === 2 && <Annexure2Form />}
-        {step === 3 && <Annexure3Form />}
-        {step === 4 && <Annexure4Form />}
-        {step === 5 && <ReviewAndSubmit />}
+    <div className="lg:flex">
+      {/* Sidebar - desktop only */}
+      <div className=" ml-3 py-4 hidden lg:flex w-60 fixed top-1/2 left-0 transform -translate-y-1/2 flex-col justify-center items-center bg-white shadow rounded-2xl">
+        <h3 className="text-lg font-semibold text-center mb-4 text-gray-700">
+          Quick Access
+        </h3>
+        <ul className="space-y-2 px-4">
+          {steps.map((label, idx) => (
+            <li key={idx}>
+              <button
+                onClick={() => setStep(idx)}
+                className={`w-full text-left text-sm px-4 py-2 rounded-md transition-all ${
+                  step === idx
+                    ? "bg-blue-100 text-blue-700 font-semibold"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                {label}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="flex justify-between">
-        <button
-          onClick={handleBack}
-          disabled={step === 0 || isLoading} // 4. Disable back button while loading
-          className="px-6 py-2 bg-gray-300 text-gray-800 rounded-lg font-medium hover:bg-gray-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Back
-        </button>
-        {step === steps.length - 1 ? (
+
+      {/* Main form */}
+      <div className="lg:ml-5 flex-1 pt-8 pb-8 px-4 sm:px-6 lg:pl-64 lg:pr-20 bg-gradient-to-br from-white to-blue-50 min-h-screen">
+        <h2 className="text-xl font-bold mb-6 text-center text-gray-800">
+          {steps[step]}
+        </h2>
+
+        <div className="mb-8">
+          {step === 0 && <ClientInfoForm />}
+          {step === 1 && <Annexure1Form />}
+          {step === 2 && <Annexure2Form />}
+          {step === 3 && <Annexure3Form />}
+          {step === 4 && <Annexure4Form />}
+          {step === 5 && <ReviewAndSubmit />}
+        </div>
+
+        <div className="flex justify-between">
           <button
-            onClick={handleSubmit}
-            disabled={isLoading} // 5. Disable submit button while loading
-            className="px-6 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-all disabled:opacity-70 disabled:cursor-wait"
+            onClick={handleBack}
+            disabled={step === 0 || isLoading}
+            className="px-6 py-2 bg-gray-300 text-gray-800 rounded-xl font-medium hover:bg-gray-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? "Submitting..." : "Submit"} {/* 6. Show loading text */}
+            Back
           </button>
-        ) : (
-          <button
-            onClick={handleNext}
-            disabled={isLoading} // 7. Disable next button while loading
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all"
-          >
-            Next
-          </button>
-        )}
+
+          {step === steps.length - 1 ? (
+            <button
+              onClick={handleSubmit}
+              disabled={isLoading}
+              className="px-6 py-2 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 transition-all disabled:opacity-70 disabled:cursor-wait"
+            >
+              {isLoading ? "Submitting..." : "Submit"}
+            </button>
+          ) : (
+            <button
+              onClick={handleNext}
+              disabled={isLoading}
+              className="px-6 py-2 bg-blue-500 text-white rounded-xl font-medium hover:bg-blue-600 transition-all"
+            >
+              Next
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,12 +1,7 @@
 import React from "react";
 import { useQuote } from "../../../context/quoteContext";
-
-// const defaultDescriptions = [
-//   "Supply of Crane",
-//   "LT Rails",
-//   "DSL System",
-//   "Erection & Commissioning",
-// ]
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Annexure4Form = () => {
   const { quoteData, updateQuote } = useQuote();
@@ -120,9 +115,9 @@ const Annexure4Form = () => {
   };
 
   return (
-    <div className="p-6 bg-white/60 backdrop-blur-md rounded-xl shadow-md space-y-6">
+    <div className="p-6 bg-white/60 backdrop-blur-md rounded-2xl shadow space-y-6">
       {quoteData.annexure1?.bayAreas?.map((bay, bayIndex) => (
-        <div key={bayIndex} className="bg-white/70 p-4 rounded-lg shadow-inner">
+        <div key={bayIndex} className="bg-white/70 p-4 rounded-xl shadow-inner">
           <h4 className="text-lg font-bold mb-4 text-gray-700">
             Bay Area: {bay.name}
           </h4>
@@ -174,101 +169,98 @@ const Annexure4Form = () => {
             }
 
             return (
-              <div key={craneIndex} className="mb-4">
+              <div key={craneIndex} className="mb-4 ">
                 <h5 className="font-medium mb-2 text-gray-600">
                   Crane: {crane.name}
                 </h5>
-
-                <table className="w-full text-sm mb-2 border-collapse border border-gray-200/80 rounded-lg">
-                  <thead>
-                    <tr className="bg-gray-100/70">
-                      <th className="border-b p-2 text-left">Sr. No.</th>
-                      <th className="border-b p-2 text-left">
-                        Technical Description
-                      </th>
-                      <th className="border-b p-2 text-left">Qty</th>
-                      <th className="border-b p-2 text-left">
-                        Unit Price (INR)
-                      </th>
-                      <th className="border-b p-2 text-left">
-                        Total Price (INR)
-                      </th>
-                      <th className="border-b p-2 text-center">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {rows.map((row, rowIndex) => (
-                      <tr key={rowIndex} className="even:bg-gray-50/50">
-                        <td className="border-b border-gray-200/80 p-2 text-center">
-                          {rowIndex + 1}
-                        </td>
-                        <td className="border-b border-gray-200/80 p-2">
-                          <input
-                            className="w-full border border-gray-300 p-1 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
-                            value={row.description}
-                            onChange={(e) =>
-                              handleChange(
-                                bayIndex,
-                                craneIndex,
-                                rowIndex,
-                                "description",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </td>
-                        <td className="border-b border-gray-200/80 p-2">
-                          <input
-                            type="number"
-                            className="w-full border border-gray-300 p-1 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
-                            value={row.qty}
-                            min={0}
-                            onChange={(e) =>
-                              handleChange(
-                                bayIndex,
-                                craneIndex,
-                                rowIndex,
-                                "qty",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </td>
-                        <td className="border-b border-gray-200/80 p-2">
-                          <input
-                            type="number"
-                            className="w-full border border-gray-300 p-1 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
-                            value={row.unitPrice}
-                            min={0}
-                            onChange={(e) =>
-                              handleChange(
-                                bayIndex,
-                                craneIndex,
-                                rowIndex,
-                                "unitPrice",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </td>
-                        <td className="border-b border-gray-200/80 p-2 text-center pr-2">
-                          {(row.qty * row.unitPrice).toLocaleString()}
-                        </td>
-                        <td className="border-b border-gray-200/80 p-2 text-center">
-                          <button
-                            onClick={() =>
-                              handleRemoveRow(bayIndex, craneIndex, rowIndex)
-                            }
-                            className="text-red-500 text-xs font-medium hover:text-red-700 transition-all"
-                          >
-                            Remove
-                          </button>
-                        </td>
+                <div className="overflow-x-auto">
+                  <table className="w-full tabel-auto text-sm mb-2 border-collapse border border-blue-200/80 rounded-xl">
+                    <thead>
+                      <tr className="bg-blue-100">
+                        <th className="p-2 text-left">Sr. No.</th>
+                        <th className="p-2 text-left">Technical Description</th>
+                        <th className="p-2 text-left">Qty</th>
+                        <th className="p-2 text-left">Unit Price (INR)</th>
+                        <th className="p-2 text-left">Total Price (INR)</th>
+                        <th className="p-2 text-center">Action</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-
+                    </thead>
+                    <tbody>
+                      {rows.map((row, rowIndex) => (
+                        <tr key={rowIndex} className="even:bg-blue-50/50">
+                          <td className="border-b border-blue-200/80 p-2 text-center">
+                            {rowIndex + 1}
+                          </td>
+                          <td className="border-b border-blue-200/80 p-2">
+                            <input
+                              className="w-full border border-gray-300 p-1 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+                              value={row.description}
+                              onChange={(e) =>
+                                handleChange(
+                                  bayIndex,
+                                  craneIndex,
+                                  rowIndex,
+                                  "description",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </td>
+                          <td className="border-b border-blue-200/80 p-2">
+                            <input
+                              type="number"
+                              className="w-full border border-gray-300 p-1 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+                              value={row.qty}
+                              min={0}
+                              onChange={(e) =>
+                                handleChange(
+                                  bayIndex,
+                                  craneIndex,
+                                  rowIndex,
+                                  "qty",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </td>
+                          <td className="border-b border-blue-200/80 p-2">
+                            <input
+                              type="number"
+                              className="w-full border border-gray-300 p-1 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+                              value={row.unitPrice}
+                              min={0}
+                              onChange={(e) =>
+                                handleChange(
+                                  bayIndex,
+                                  craneIndex,
+                                  rowIndex,
+                                  "unitPrice",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </td>
+                          <td className="border-b border-blue-200/80 p-2 text-center pr-2">
+                            {(row.qty * row.unitPrice).toLocaleString()}
+                          </td>
+                          <td className="border-b border-blue-200/80 p-2 text-center">
+                            <button
+                              onClick={() =>
+                                handleRemoveRow(bayIndex, craneIndex, rowIndex)
+                              }
+                              className="text-red-500 text-xs font-medium hover:text-red-700 transition-all"
+                            >
+                              <FontAwesomeIcon
+                                icon={faTrash}
+                                className="text-blue-500 hover:text-red-500 cursor-pointer"
+                              />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
                 <button
                   onClick={() => handleAddRow(bayIndex, craneIndex)}
                   className="bg-blue-500 text-white text-sm px-3 py-1 rounded-md font-medium hover:bg-blue-600 transition-all"
@@ -288,7 +280,7 @@ const Annexure4Form = () => {
           </label>
           <input
             type="number"
-            className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border border-gray-300 p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={annexure4.transport?.unit || ""}
             min={0}
             onChange={(e) =>
@@ -305,7 +297,7 @@ const Annexure4Form = () => {
           </label>
           <input
             type="number"
-            className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border border-gray-300 p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={annexure4.load?.unit || ""}
             min={0}
             onChange={(e) =>
@@ -325,7 +317,7 @@ const Annexure4Form = () => {
             <div key={index} className="flex space-x-2 mb-2">
               <input
                 type="text"
-                className="flex-1 border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="flex-1 border border-gray-300 p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
                 placeholder="Label (e.g., Installation)"
                 value={charge.label || ""}
                 onChange={(e) => {
@@ -339,7 +331,7 @@ const Annexure4Form = () => {
               />
               <input
                 type="number"
-                className="w-1/3 border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-1/3 border border-gray-300 p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
                 placeholder="Amount"
                 min={0}
                 value={charge.unit || ""}

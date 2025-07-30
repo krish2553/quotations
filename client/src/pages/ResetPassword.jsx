@@ -87,7 +87,7 @@ const ResetPassword = () => {
       {!isEmailSent && (
         <form
           onSubmit={onSubmitEmail}
-          className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm"
+          className="bg-slate-900 p-8 rounded-xl shadow-lg w-96 text-sm"
         >
           <h1 className="text-white text-2xl font-semibold text-center mb-4">
             Reset Password
@@ -117,7 +117,7 @@ const ResetPassword = () => {
       {!isOtpSubmitted && isEmailSent && (
         <form
           onSubmit={onSubmitOtp}
-          className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm"
+          className="bg-slate-900 p-8 rounded-xl shadow-lg w-96 text-sm"
         >
           <h1 className="text-white text-2xl font-semibold text-center mb-4">
             OTP Verification
@@ -151,7 +151,7 @@ const ResetPassword = () => {
       {isOtpSubmitted && isEmailSent && (
         <form
           onSubmit={onSubmitNewPassword}
-          className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm"
+          className="bg-slate-900 p-8 rounded-xl shadow-lg w-96 text-sm"
         >
           <h1 className="text-white text-2xl font-semibold text-center mb-4">
             New Password

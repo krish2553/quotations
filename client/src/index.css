@@ -4,3 +4,24 @@
 * {
   font-family: "Outfit", sans-serif;
 }
+
+/* Minimalist scrollbar for WebKit-based browsers (Chrome, Edge, Safari) */
+.scrollbar-minimal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-minimal::-webkit-scrollbar-thumb {
+  background-color: none;/* light blue */
+  border-radius: 10px;
+}
+
+.scrollbar-minimal::-webkit-scrollbar-track {
+  background: none;
+}
+/* For Firefox */
+.scrollbar-minimal {
+  scrollbar-width: thin;
+  background-color: none;
+  background: none;
+  scrollbar-color: #2b7fff77 transparent; /* light blue */
+}
