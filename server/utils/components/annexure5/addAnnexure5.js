@@ -87,7 +87,7 @@ export default function addAnnexure5(doc, data) {
   doc.x = doc.page.margins.left;
 
   doc.moveDown(0.5);
-  doc.text("Delivery Terms: FOR Narsanda, Kheda WORKS");
+  doc.text("Delivery Terms:");
 
   // Section Title 5.2
   // doc.addPage(); // Move to new page for warranty section

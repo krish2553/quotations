@@ -39,6 +39,10 @@ const ReviewAndSubmit = () => {
       >
         {loading ? "Generating..." : "Preview PDF"}
       </button>
+{/* 
+      <pre className="bg-gray-100 p-4 rounded text-xs overflow-auto max-h-[400px]">
+        {JSON.stringify(quoteData, null, 2)}
+      </pre> */}
 
       {pdfUrl && (
         <iframe

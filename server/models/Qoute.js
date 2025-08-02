@@ -2,10 +2,15 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-// Accept arrays like [["Label", "Value"], ...]
-const TableSchema = [[String]];
+// ========== Sub-Schemas ==========
 
-// Crane Schema
+// Sub-schema for table-like [["Label", "Value"]] format
+const TableSchema = {
+  type: [[String]],
+  default: [],
+};
+
+// Crane Sub-Schema (Annexure 1)
 const CraneSchema = new Schema(
   {
     name: String,
@@ -14,37 +19,31 @@ const CraneSchema = new Schema(
     craneGroups: TableSchema,
     bridge: TableSchema,
     mainHoist: TableSchema,
+    auxHoist: TableSchema, // ✅ Added
     crossTraversing: TableSchema,
     longTravelling: TableSchema,
     powerSupply: TableSchema,
     weights: TableSchema,
     componentMainHoist: TableSchema,
+    componentAuxHoist: TableSchema, // ✅ Added
     componentTrolley: TableSchema,
     componentBridge: TableSchema,
   },
   { _id: false }
 );
 
-// Bay Area Schema (Annexure 1 + 4)
+// Bay Area Sub-Schema (Annexure 1 + 4)
 const BayAreaSchema = new Schema(
   {
     name: String,
     cranes: [CraneSchema],
-    length: String, // for annexure4
-    dsl: String, // for annexure4
-    qty1: Number,
-    unit1: Number,
-    qty2: Number,
-    unit2: Number,
-    qty3: Number,
-    unit3: Number,
-    qty4: Number,
-    unit4: Number,
+    length: String, // optional, for annexure4
+    dsl: String, // optional, for annexure4
   },
   { _id: false }
 );
 
-// Crane Component (Annexure 1 – Crane Components)
+// Component (Annexure 1 – Crane Components)
 const ComponentSchema = new Schema(
   {
     name: String,
@@ -55,26 +54,26 @@ const ComponentSchema = new Schema(
 );
 
 // Make of Bought-Out Items (Annexure 3)
-const BoughtOutItemSchema = new Schema(
-  {
-    srNo: String,
-    itemDescription: String,
-    vendor: String,
-    specOrCapacity: String, // optional
-  },
-  { _id: false }
-);
-
 const Annexure3Schema = new Schema(
   {
-    mechanical: [[String]],
-    electrical: [[String]],
-    controlSafety: [[String]],
+    mechanical: TableSchema,
+    electrical: TableSchema,
+    controlSafety: TableSchema,
   },
   { _id: false }
 );
 
-// Annexure 4 extras
+// Crane Price Entry Schema (Annexure 4)
+const CranePriceSchema = new Schema(
+  {
+    description: String,
+    qty: Number,
+    unitPrice: Number,
+  },
+  { _id: false }
+);
+
+// Annexure 4 Pricing Schema
 const PriceAnnexureSchema = new Schema(
   {
     bayAreas: [BayAreaSchema],
@@ -86,13 +85,7 @@ const PriceAnnexureSchema = new Schema(
     },
     cranePrices: {
       type: Map,
-      of: [
-        {
-          description: String,
-          qty: Number,
-          unitPrice: Number,
-        },
-      ],
+      of: [CranePriceSchema],
     },
     other: [
       {
@@ -104,7 +97,8 @@ const PriceAnnexureSchema = new Schema(
   { _id: false }
 );
 
-// Quote Schema
+// ========== Main Quote Schema ==========
+
 const QuoteSchema = new Schema(
   {
     quotationId: String,
@@ -129,7 +123,7 @@ const QuoteSchema = new Schema(
     annexure3: Annexure3Schema,
     annexure4: PriceAnnexureSchema,
     annexure5: {
-      type: Schema.Types.Mixed,
+      type: Schema.Types.Mixed, // Optional structure
     },
   },
   { timestamps: true }

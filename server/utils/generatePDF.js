@@ -45,7 +45,7 @@ const generatePDF = async (data) => {
       if (logicalPage === 1) addHeader(doc, data, "logo");
       else addHeader(doc, data, "default");
     });
-    console.log("generatePDF : ", data);
+    // console.log("generatePDF : ", data);
     addCoverPage(doc, data);
     addIntroLetter(doc, data);
     addAnnexure1(doc, data);

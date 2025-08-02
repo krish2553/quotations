@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 import { useQuote } from "../../context/quoteContext";
+import NewClientModal from "../../components/NewClientModal";
 
 const ClientInfoForm = () => {
   const { quoteData, updateQuote } = useQuote();
   const [clientOptions, setClientOptions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+  // State for the new client modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Fetch clients when searchTerm changes
   useEffect(() => {
@@ -51,15 +55,40 @@ const ClientInfoForm = () => {
   };
 
   const handleSelect = (selected) => {
-    if (!selected?.data) return;
+    if (!selected?.data) {
+      // Clear client data if selection is cleared
+      updateQuote("client", {
+        name: "",
+        contactPerson: "",
+        subject: "",
+        reference: "",
+        address: ["", "", "", ""],
+        kindAttention: "",
+      });
+      return;
+    }
     updateQuote("client", selected.data);
   };
 
+  // Handler for when a new client is successfully saved
+  const handleClientSaved = (savedClient) => {
+    // Update the main form with the new client data
+    updateQuote("client", savedClient);
+    setSearchTerm("");
+    setClientOptions([]);
+  };
+
   return (
-    <div className="p-6 bg-white/60 backdrop-blur-md rounded-2xl shadow">
+    <div className="p-4 sm:p-6 bg-white/60 backdrop-blur-md rounded-2xl shadow">
+      <NewClientModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onClientSaved={handleClientSaved}
+      />
+
       <div className="grid gap-4">
         {/* Select Existing Client */}
-        <div className="grid grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
+        <div className="grid grid-cols-1 lg:grid-cols-[10rem_1fr_auto] items-center gap-4 py-3 border-b border-gray-200/80">
           <label className="font-medium text-gray-700">
             Select Existing Client
           </label>
@@ -72,7 +101,7 @@ const ClientInfoForm = () => {
             styles={{
               control: (base) => ({
                 ...base,
-                borderRadius: "0.5rem",
+                borderRadius: "0.7rem",
                 borderColor: "#D1D5DB",
                 "&:hover": {
                   borderColor: "#A5B4FC",
@@ -88,21 +117,29 @@ const ClientInfoForm = () => {
               }),
             }}
           />
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className="px-3 py-2 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition-all w-full lg:w-auto"
+          >
+            New Client
+          </button>
         </div>
 
         {/* Quotation ID */}
-        <div className="grid grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
+        <div className="grid grid-cols-1 lg:grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
           <label className="font-medium text-gray-700">Quotation ID</label>
           <input
             type="text"
             value={quoteData.quotationId}
             readOnly
+            tabIndex={-1}
             className="bg-gray-100/70 p-2 rounded-xl border border-gray-300 w-full"
           />
         </div>
 
         {/* Date */}
-        <div className="grid grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
+        <div className="grid grid-cols-1 lg:grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
           <label className="font-medium text-gray-700">Date</label>
           <input
             type="text"
@@ -113,7 +150,7 @@ const ClientInfoForm = () => {
         </div>
 
         {/* Client Name */}
-        <div className="grid grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
+        <div className="grid grid-cols-1 lg:grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
           <label className="font-medium text-gray-700">
             Client/Company Name
           </label>
@@ -126,7 +163,7 @@ const ClientInfoForm = () => {
         </div>
 
         {/* Contact Person */}
-        <div className="grid grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
+        <div className="grid grid-cols-1 lg:grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
           <label className="font-medium text-gray-700">Contact Person</label>
           <input
             type="text"
@@ -142,7 +179,7 @@ const ClientInfoForm = () => {
         {(quoteData.client?.address || []).map((line, idx) => (
           <div
             key={idx}
-            className="grid grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80"
+            className="grid grid-cols-1 lg:grid-cols-[10rem_1fr] items-center gap-4 py-1 border-gray-200/80"
           >
             <label className="font-medium text-gray-700">
               Address Line {idx + 1}
@@ -151,7 +188,7 @@ const ClientInfoForm = () => {
               type="text"
               value={line}
               onChange={(e) => {
-                const updated = [...quoteData.client.address];
+                const updated = [...(quoteData.client.address || [])];
                 updated[idx] = e.target.value;
                 handleClientChange("address", updated);
               }}
@@ -161,7 +198,7 @@ const ClientInfoForm = () => {
         ))}
 
         {/* Subject */}
-        <div className="grid grid-cols-[10rem_1fr] items-center gap-4 py-3 border-b border-gray-200/80">
+        <div className="grid grid-cols-1 lg:grid-cols-[10rem_1fr] items-center gap-4 py-4 border-t border-b border-gray-200/80">
           <label className="font-medium text-gray-700">Subject</label>
           <input
             type="text"
@@ -172,7 +209,7 @@ const ClientInfoForm = () => {
         </div>
 
         {/* Reference */}
-        <div className="grid grid-cols-[10rem_1fr] items-center gap-4 py-3">
+        <div className="grid grid-cols-1 lg:grid-cols-[10rem_1fr] items-center gap-4 py-3">
           <label className="font-medium text-gray-700">Reference</label>
           <input
             type="text"

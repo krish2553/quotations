@@ -8,7 +8,7 @@ function createTable(
   if (!Array.isArray(tableData)) {
 tableData = [];
   } // Safeguard for non-array/null data
-  console.log("createTable : ", tableData);
+  // console.log("createTable : ", tableData);
   const startX = doc.page.margins.left;
   let currentY = doc.y;
 

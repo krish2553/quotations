@@ -3,7 +3,7 @@ import addCrane from "./addCrane.js";
 // SECTION: Render one bay area and all cranes within it with Annexure A.1 numbering
 export default function addBayArea(doc, bayData, bayIndex = 1) {
   const bayNumber = `1.${bayIndex}`;
-  console.log("addBayArea : ", bayData);
+  // console.log("addBayArea : ", bayData);
   // 🔹 Bay Area Heading: 1.1
   doc
     .font("calibri-bold")

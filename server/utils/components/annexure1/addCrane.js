@@ -2,7 +2,7 @@ import { createTable } from "./tableUtils.js";
 
 // SECTION: Render a crane with multi-section 2-column tables
 export default function addCrane(doc, crane, craneNumber = "") {
-  console.log("addCrane : ", crane);
+  // console.log("addCrane : ", crane);
   doc
     .font("calibri")
     .fillColor("#3c59a8")

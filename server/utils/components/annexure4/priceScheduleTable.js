@@ -54,7 +54,14 @@ export default function generatePriceScheduleTable(doc, data) {
         width: columnWidths[2] - 10,
       });
 
-      uniformRowHeight = Math.max(defaultRowHeight, maxDescHeight) - 12;
+      // uniformRowHeight = Math.max(defaultRowHeight, maxDescHeight) - 12;
+
+      const descHeights = descriptions.map((desc) =>
+        Math.max(
+          defaultRowHeight,
+          doc.heightOfString(desc, { width: columnWidths[3] - 10 })
+        )
+      );
 
       descriptions.forEach((desc, descIndex) => {
         const qty = quantities[descIndex] || 1;
@@ -79,7 +86,8 @@ export default function generatePriceScheduleTable(doc, data) {
           total.toLocaleString("en-IN"),
         ];
 
-        const rowHeight = uniformRowHeight;
+        // const rowHeight = uniformRowHeight;
+        const rowHeight = descHeights[descIndex];
 
         table.rows.push({
           data: rowData,

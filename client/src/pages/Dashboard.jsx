@@ -1,218 +1,140 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const Dashboard = () => {
+  const { backendUrl } = useContext(AppContext);
   const navigate = useNavigate();
-  const [quotes, setQuotes] = useState(() => []);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortKey, setSortKey] = useState("date");
-  const [sortOrder, setSortOrder] = useState("desc");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState(null);
-  const [activeQuoteId, setActiveQuoteId] = useState(null);
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
-  const fetchQuotes = async () => {
-    try {
-      const res = await axios.get(backendUrl + `/api/quoteSearch`, {
-        params: {
-          search: searchTerm,
-          sortKey,
-          sortOrder,
-          page: currentPage,
-          limit: 25,
-        },
-      });
-      setQuotes(res.data.quotes);
-      setTotalPages(res.data.totalPages);
-    } catch (err) {
-      console.error("Failed to fetch quotes:", err);
-    }
-  };
+  const [stats, setStats] = useState({
+    totalQuotes: 0,
+    totalClients: 0,
+    monthlyQuoteCount: 0,
+    yearlyQuoteCount: 0,
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchQuotes();
-  }, [searchTerm, sortKey, sortOrder, currentPage]);
+    const fetchDashboardStats = async () => {
+      try {
+        const { data } = await axios.get(
+          `${backendUrl}/api/quotes/dashboard-stats`
+        );
+        if (data.success) setStats(data.data);
+      } catch (error) {
+        console.error("Error fetching dashboard stats:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDashboardStats();
+  }, [backendUrl]);
 
-  const handleSort = (key) => {
-    if (sortKey === key) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    } else {
-      setSortKey(key);
-      setSortOrder("asc");
-    }
+  const chartData = [
+    { name: "Apr", value: stats.monthlyCounts?.Apr || 0 },
+    { name: "May", value: stats.monthlyCounts?.May || 0 },
+    { name: "Jun", value: stats.monthlyCounts?.Jun || 0 },
+    { name: "Jul", value: stats.monthlyCounts?.Jul || 0 },
+    { name: "Aug", value: stats.monthlyCounts?.Aug || 0 },
+    { name: "Sep", value: stats.monthlyCounts?.Sep || 0 },
+    { name: "Oct", value: stats.monthlyCounts?.Oct || 0 },
+    { name: "Nov", value: stats.monthlyCounts?.Nov || 0 },
+    { name: "Dec", value: stats.monthlyCounts?.Dec || 0 },
+    { name: "Jan", value: stats.monthlyCounts?.Jan || 0 },
+    { name: "Feb", value: stats.monthlyCounts?.Feb || 0 },
+    { name: "Mar", value: stats.monthlyCounts?.Mar || 0 },
+  ];
+
+  const goToQuoteList = (filter) => {
+    navigate(`/quotes/by-period?filter=${filter}`);
   };
 
-  const handlePreviewPDF = async (quote) => {
-  try {
-    setLoading(true);
-    const response = await axios.post(
-      `${backendUrl}/api/auth/generate-pdf-q`,
-      { quoteId: quote._id },
-      { responseType: "blob" }
+  if (loading) {
+    return (
+      <div className="p-6 max-w-7xl mx-auto text-center text-gray-600">
+        Loading dashboard...
+      </div>
     );
-
-    const blob = new Blob([response.data], { type: "application/pdf" });
-    const pdfObjectUrl = URL.createObjectURL(blob);
-    setPdfUrl(pdfObjectUrl);
-  } catch (err) {
-    console.error("PDF generation failed", err);
-    alert("Failed to generate PDF.");
-  } finally {
-    setLoading(false);
   }
-};
-
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Quotation Dashboard</h2>
+    <div className="p-6 max-w-7xl mx-auto space-y-8">
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-bold text-gray-800">Dashboard</h2>
         <button
+          className="px-4 py-2 bg-blue-600 text-white cursor-pointer rounded-xl text-sm font-medium hover:bg-blue-700"
           onClick={() => navigate("/create-quote")}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
         >
-          Create Quote
+          + Create Quote
         </button>
       </div>
 
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Search by client name..."
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          onClick={() => goToQuoteList("all")}
+          className="bg-white border border-blue-200 rounded-xl p-4 shadow-sm cursor-pointer hover:bg-blue-50"
+        >
+          <h3 className="text-gray-700 text-sm font-medium">Total Quotes</h3>
+          <p className="text-2xl font-bold text-blue-600">
+            {stats.totalQuotes}
+          </p>
+        </div>
+        {/* <div
+          onClick={() => goToQuoteList("monthly")}
+          className="bg-white border border-green-200 rounded-xl p-4 shadow-sm cursor-pointer hover:bg-green-50"
+        >
+          <h3 className="text-gray-700 text-sm font-medium">Monthly Quotes</h3>
+          <p className="text-2xl font-bold text-green-600">
+            {stats.monthlyQuoteCount}
+          </p>
+        </div>
+        <div
+          onClick={() => goToQuoteList("yearly")}
+          className="bg-white border border-yellow-200 rounded-xl p-4 shadow-sm cursor-pointer hover:bg-yellow-50"
+        >
+          <h3 className="text-gray-700 text-sm font-medium">Yearly Quotes</h3>
+          <p className="text-2xl font-bold text-yellow-600">
+            {stats.yearlyQuoteCount}
+          </p>
+        </div> */}
+        <div
+          onClick={() => navigate("/clients")}
+          className="bg-white border border-purple-200 rounded-xl p-4 shadow-sm cursor-pointer hover:bg-purple-50"
+        >
+          <h3 className="text-gray-700 text-sm font-medium">Total Clients</h3>
+          <p className="text-2xl font-bold text-purple-600">
+            {stats.totalClients}
+          </p>
+        </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200 rounded shadow-sm">
-          <thead>
-            <tr className="bg-gray-100 text-left">
-              <th className="p-3">Quote ID</th>
-              <th
-                className="p-3 cursor-pointer"
-                onClick={() => handleSort("name")}
-              >
-                Client Name{" "}
-                {sortKey === "name" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
-              </th>
-              <th
-                className="p-3 cursor-pointer"
-                onClick={() => handleSort("date")}
-              >
-                Date{" "}
-                {sortKey === "date" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
-              </th>
-              <th className="p-3">Contact Person</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(quotes || []).length > 0 ? (
-              quotes.map((quote) => (
-                <tr key={quote._id} className="border-t hover:bg-gray-50">
-                  <td className="p-3">{quote.quotationId || "N/A"}</td>
-                  <td className="p-3">{quote.client?.name || "N/A"}</td>
-                  <td className="p-3">{quote.date || "N/A"}</td>
-                  <td className="p-3">
-                    {quote.client?.contactPerson || "N/A"}
-                  </td>
-                  <td className="p-3">
-                    <button
-                      onClick={() => handlePreviewPDF(quote)}
-                      className="text-sm px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
-                    >
-                      {loading && activeQuoteId === quote._id
-                        ? "Loading..."
-                        : "Preview"}
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5" className="p-3 text-center text-gray-500">
-                  No quotes found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      {/* Bar Chart */}
+      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">
+          Quote Trends
+        </h3>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="value" fill="#3B82F6" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
-
-      {totalPages > 1 && (
-        <div className="flex justify-center mt-4 space-x-2">
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-          >
-            Prev
-          </button>
-          <span className="px-4 py-2">
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-          >
-            Next
-          </button>
-        </div>
-      )}
-
-      {pdfUrl && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="bg-white w-11/12 max-w-4xl h-[80vh] rounded shadow-lg relative">
-            <button
-              onClick={() => setPdfUrl(null)}
-              className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8"
-            >
-              ×
-            </button>
-            <iframe
-              src={pdfUrl}
-              className="w-full h-full rounded"
-              title="PDF Preview"
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
-// {
-//   pdfUrl && (
-//     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-//       <div className="bg-white w-11/12 max-w-4xl h-[80vh] rounded shadow-lg relative">
-//         <button
-//           onClick={() => {
-//             setPdfUrl(null);
-//             setActiveQuoteId(null);
-//           }}
-//           className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 text-lg"
-//         >
-//           ×
-//         </button>
-//         <iframe
-//           src={pdfUrl}
-//           className="w-full h-full rounded"
-//           title="PDF Preview"
-//         />
-//       </div>
-//     </div>
-//   );
-// }
 
 export default Dashboard;

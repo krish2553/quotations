@@ -6,7 +6,7 @@ import addCraneComponents from "./addCraneComponents.js";
 export default function addAnnexure1(doc, data) {
   doc.font("calibri").fontSize(10).fillColor("black");
 
-  console.log("addAnnexure1 : ", data);
+  // console.log("addAnnexure1 : ", data);
   // First page for Annexure 1 heading
   doc.addPage();
   doc

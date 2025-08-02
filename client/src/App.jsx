@@ -8,6 +8,8 @@ import { ToastContainer } from "react-toastify";
 import QuoteForm from "./pages/quoteForm/QuoteForm";
 import { QuoteProvider } from "./context/quoteContext";
 import Dashboard from "./pages/Dashboard";
+import QuoteListByPeriod from "./pages/QuoteListByPeriod";
+import ClientCRUD from "./pages/ClientCRUD";
 
 const App = () => {
   return (
@@ -18,9 +20,11 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/email-verify" element={<EmailVerify />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/quotes/by-period" element={<QuoteListByPeriod />} />
+        <Route path="/clients" element={<ClientCRUD />} />
         <Route
-          path="/"
+          path="/create-quote"
           element={
             <QuoteProvider>
               <QuoteForm />

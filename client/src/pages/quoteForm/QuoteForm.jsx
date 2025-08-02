@@ -8,6 +8,7 @@ import ReviewAndSubmit from "./ReviewAndSubmit";
 import { useQuote } from "../../context/quoteContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+import BreadcrumbNavbar from "../../components/BreadcrumbNavbar";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const steps = [
@@ -80,8 +81,14 @@ const QuoteForm = () => {
         <h2 className="text-xl font-bold mb-6 text-center text-gray-800">
           {steps[step]}
         </h2>
+        <BreadcrumbNavbar
+          customLabels={{
+            quotes: "x",
+            view: "y",
+          }}
+        />
 
-        <div className="mb-8">
+        <div className="my-4">
           {step === 0 && <ClientInfoForm />}
           {step === 1 && <Annexure1Form />}
           {step === 2 && <Annexure2Form />}
