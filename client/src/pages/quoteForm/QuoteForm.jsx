@@ -9,6 +9,7 @@ import { useQuote } from "../../context/quoteContext";
 import { toast } from "react-toastify";
 import axios from "axios";
 import BreadcrumbNavbar from "../../components/BreadcrumbNavbar";
+import { useNavigate } from "react-router-dom";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const steps = [
@@ -25,12 +26,15 @@ const QuoteForm = () => {
   const { quoteData } = useQuote();
   const [isLoading, setIsLoading] = useState(false); // 1. Added loading state
 
+  const navigate = useNavigate();
+
   const handleSubmit = async () => {
     setIsLoading(true); // 2. Set loading to true
     try {
       await axios.post(backendUrl + "/api/quotes", quoteData);
       toast.success("Quote submitted successfully!");
       window.alert("Quote submitted successfully!"); // 3. Alert on success
+      navigate("/");
       window.location.reload(); // 3. Refresh the page on success
     } catch (err) {
       toast.error("Error submitting quote.");

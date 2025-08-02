@@ -19,7 +19,7 @@ const BreadcrumbNavbar = ({ customLabels = {} }) => {
   });
 
   return (
-    <div className="w-full bg-white px-6 py-3 border-b border-gray-200 shadow-sm sticky top-0 z-20">
+    <div className="w-full bg-white px-6 py-3 border-b border-gray-200 rounded-2xl shadow sticky top-0 z-20">
       <nav className="text-sm text-gray-600 font-medium flex gap-1 flex-wrap">
         <span
           className="text-blue-600 hover:underline cursor-pointer"

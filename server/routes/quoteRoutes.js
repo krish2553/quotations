@@ -30,16 +30,16 @@ router.get("/next-id", async (req, res) => {
     const today = new Date();
     const year = today.getFullYear();
     const fyStart = today.getMonth() >= 3 ? year : year - 1;
-    const fy = `${String(fyStart)}-${String(fyStart + 1).slice(2)}`;
+    const fy = `${String(fyStart).slice(2)}-${String(fyStart + 1).slice(2)}`;
 
     const quotes = await Quote.find({
-      quotationId: { $regex: `^QTN/${fy}/\\d{3}$` },
+      quotationId: { $regex: `QN-\\d{3}/${fy}$` },
     });
 
     let maxSequence = 0;
 
     quotes.forEach((quote) => {
-      const match = quote.quotationId.match(/QTN\/\d{4}-\d{2}\/(\d{3})/);
+      const match = quote.quotationId.match(/QN-(\d{3})/);
       if (match) {
         const num = parseInt(match[1]);
         if (num > maxSequence) maxSequence = num;
@@ -48,7 +48,7 @@ router.get("/next-id", async (req, res) => {
 
     const nextNumber = maxSequence + 1;
     const padded = String(nextNumber).padStart(3, "0");
-    const quotationId = `QTN/${fy}/${padded}`;
+    const quotationId = `QN-${padded}/${fy}`;
 
     res.json({ quotationId });
   } catch (err) {
